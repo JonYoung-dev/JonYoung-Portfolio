@@ -2,6 +2,7 @@
 
 import MyNavBar from "@/components/ui/navBar";
 import MyHero from "@/components/ui/hero";
+import { ProjectPreviewer } from "@/components/projectPreview";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
 
       Curabitur a nibh tortor. Nulla dui eros, semper sit amet lacus in, sodales ultrices ex. Quisque tempus nibh sed mauris tristique, eget pharetra orci tempor. Maecenas lacinia leo ut convallis maximus. Donec at malesuada urna, vel eleifend ipsum. Nunc nec magna justo. Vestibulum blandit tempus tortor a scelerisque. Suspendisse blandit vulputate velit, sed fringilla ligula semper ac. 
       </div>
+      <ProjectPreviewer/>
     </div>
   );
 }
