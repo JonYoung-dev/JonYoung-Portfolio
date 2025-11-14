@@ -1,4 +1,3 @@
-import { TypographyH1, TypographyP } from "@/components/ui/typography";
 import { createSlug } from "@/lib/utils";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -8,7 +7,7 @@ export default async function ProjectDetailPage({ params }) {
   const { slug } = await params;
 
   const projects = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/projects`
+    `http://localhost:3000/api/projects`
   )
     .then((res) => res.json())
     .then((data) => data.projects)
@@ -20,8 +19,7 @@ export default async function ProjectDetailPage({ params }) {
   const project = projects.find((proj) => createSlug(proj.title) === slug);
   return (
     <>
-      {/* <div>My Post's slug: {slug}</div> */}
-      <TypographyH1>{project.title}</TypographyH1>
+      <h1>{project.title}</h1>
       {project.img ? (
         <Image
           width={125}
@@ -32,7 +30,7 @@ export default async function ProjectDetailPage({ params }) {
       ) : (
         <Skeleton className="h-[125px] w-[250px] rounded-xl mt-5" />
       )}
-      <TypographyP>{project.description}</TypographyP>
+      <p>{project.description}</p>
     </>
   );
 }

@@ -2,20 +2,20 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
-
+import { createSlug } from "@/lib/utils.js"
 
 // takes in an array of proejcts as a prop
 
 export async function ProjectPreviewer({ className = ""}) {
-  // replace with env for hosted vs not hosted
+  // replace with env for hosted vs not hosted?
   const res = await fetch("http://localhost:3000/api/projects");
 
   const projects = await res.json();
-
+  console.log(projects);
 
   return (
     <div className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-6 my-10 ${className}`}>
-      {projects.data.map((project, i) => (
+      {projects.projects.map((project, i) => (
         <Card key={i} className="flex flex-col justify-between shadow-md">
           <CardHeader>
             <CardTitle>{project.title}</CardTitle>
@@ -30,7 +30,7 @@ export async function ProjectPreviewer({ className = ""}) {
             )}
 
             <Button asChild className="w-full">
-              <a href={project.link} target="_blank" rel="noopener noreferrer">
+              <a href={`/projects/${createSlug(project.title)}`}>
                 View Project
               </a>
             </Button>

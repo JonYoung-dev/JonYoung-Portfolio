@@ -16,8 +16,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { TypographyH1 } from "@/components/ui/typography";
-// Import rest of the components needed from shadcn/ui
 
 const newProjectSchema = z.object({
   title: z.string().min(2, { message: "Your title is too short" }).max(200),
@@ -65,7 +63,7 @@ export default function NewPage() {
 
   return (
     <>
-      <TypographyH1>Create New Project</TypographyH1>
+      <h1>Create New Project</h1>
       <div className="w-[50%]">
         <Form {...form}>
           <form
