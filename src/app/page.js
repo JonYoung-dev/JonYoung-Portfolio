@@ -7,7 +7,6 @@ import { ProjectPreviewer } from "@/components/projectPreview";
 export default function Home() {
   return (
     <div className=" max-w-[60vw] flex-col min-h-screen items-center ml-auto mr-auto bg-zinc-50 font-sans dark:bg-black">
-      <MyNavBar></MyNavBar>
       <MyHero></MyHero>
       <div>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nunc nisl, mattis in neque non, hendrerit pellentesque diam. Curabitur sed dictum mauris. Donec dui lectus, luctus vitae semper non, sodales ac nibh. Donec eu luctus velit, eget mattis massa. Mauris lectus augue, cursus nec elit ac, blandit auctor velit. Duis laoreet nisi vel risus elementum, ac facilisis libero elementum. Ut fermentum, lacus eu egestas consequat, felis arcu vestibulum elit, nec dapibus risus sapien viverra dui. Mauris sed diam velit. Morbi facilisis sapien at sem dignissim pulvinar. Proin id arcu molestie, aliquam arcu a, tincidunt ante.
