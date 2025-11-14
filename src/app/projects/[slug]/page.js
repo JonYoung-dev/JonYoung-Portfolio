@@ -22,10 +22,11 @@ export default async function ProjectDetailPage({ params }) {
       <h1>{project.title}</h1>
       {project.img ? (
         <Image
-          width={125}
-          height={250}
+          width={500}
+          height={500}
           alt={"project image"}
           className="rounded-xl my-2"
+          src={project.link}
         />
       ) : (
         <Skeleton className="h-[125px] w-[250px] rounded-xl mt-5" />
