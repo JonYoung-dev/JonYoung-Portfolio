@@ -6,12 +6,6 @@ export async function POST(req) {
     const img = formData.get("img");
     const link = formData.get("link");
     const keywords = formData.get("keywords");
-    // ... // complete the rest
-
-    // FUTURE CONCERNS - you can ignore them now
-    // TODO: (recommended) validate here again with Zod
-    // TODO: persist to DB (Prisma/Drizzle/etc.)
-    // TODO: revalidatePath("/projects") after write (if using Next cache)
 
     console.log({ project: { title, description, img, link, keywords } });
 
