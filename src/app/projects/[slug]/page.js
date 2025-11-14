@@ -7,7 +7,7 @@ export default async function ProjectDetailPage({ params }) {
   const { slug } = await params;
 
   const projects = await fetch(
-    `http://localhost:3000/api/projects`
+    `${process.env.baseurl}/api/projects`
   )
     .then((res) => res.json())
     .then((data) => data.projects)
