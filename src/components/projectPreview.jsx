@@ -8,7 +8,7 @@ import { createSlug } from "@/lib/utils.js"
 
 export async function ProjectPreviewer({ className = ""}) {
   // replace with env for hosted vs not hosted?
-  const res = await fetch(`${process.env.NEXT_PUBLIC_baseurl}/api/projects`);
+  const res = await fetch(`http://localhost:3000/api/projects`);
 
   const projects = await res.json();
   console.log(projects);

@@ -7,7 +7,7 @@ export default async function ProjectDetailPage({ params }) {
   const { slug } = await params;
 
   const projects = await fetch(
-    `${process.env.NEXT_PUBLIC_baseurl}/api/projects`
+    `http://localhost:3000/api/projects`
   )
     .then((res) => res.json())
     .then((data) => data.projects)
