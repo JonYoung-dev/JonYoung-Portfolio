@@ -1,3 +1,4 @@
+"use client"
 import {
    NavigationMenu,
   NavigationMenuContent,
@@ -25,10 +26,22 @@ export default function MyNavBar() {
             <NavigationMenuLink href="/">the team</NavigationMenuLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
-                <NavigationMenuItem>
+        <NavigationMenuItem>
           <NavigationMenuTrigger>Images</NavigationMenuTrigger>
           <NavigationMenuContent>
             <NavigationMenuLink href="/">dog pics</NavigationMenuLink>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>New Project</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <NavigationMenuLink href="/projects/new">Add</NavigationMenuLink>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Contact Us</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <NavigationMenuLink href="/contact-me">link</NavigationMenuLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>

@@ -1,6 +1,8 @@
 import { createSlug } from "@/lib/utils";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
+import NotFound from "@/app/not-found";
+import { notFound } from "next/navigation";
 // import rest of components needed.
 
 export default async function ProjectDetailPage({ params }) {
@@ -17,6 +19,10 @@ export default async function ProjectDetailPage({ params }) {
     });
 
   const project = projects.find((proj) => createSlug(proj.title) === slug);
+  if (!project) return( 
+    <NotFound/>
+  );
+
   return (
     <>
       <h1>{project.title}</h1>
