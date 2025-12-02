@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 22, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/jrjry/Desktop/imanAttempt2/portfolio/src/components/contact-form.jsx"],"sourcesContent":["export default function ContactForm() {\r\n            const contactFormSchema = z.object({\r\n                name: z.string().max(254, \"Name should be less than 254 characters\"),\r\n                email: z.email().max(500, \"get a shorter email\"),\r\n                body: z.string().max(4000, \"Please send me a letter through more formal channels\")\r\n            });\r\n    return (\r\n        <Card>\r\n\r\n        </Card>\r\n    )\r\n}"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACZ,MAAM,oBAAoB,EAAE,MAAM,CAAC;QAC/B,MAAM,EAAE,MAAM,GAAG,GAAG,CAAC,KAAK;QAC1B,OAAO,EAAE,KAAK,GAAG,GAAG,CAAC,KAAK;QAC1B,MAAM,EAAE,MAAM,GAAG,GAAG,CAAC,MAAM;IAC/B;IACR,qBACI,8OAAC;;;;;AAIT","debugId":null}},
-    {"offset": {"line": 44, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/jrjry/Desktop/imanAttempt2/portfolio/src/app/contact-me/page.jsx"],"sourcesContent":["import ContactForm from \"@/components/contact-form\"\r\n\r\nexport default function ContactMe() {\r\n    return (\r\n        <ContactForm></ContactForm>\r\n    )\r\n}"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACpB,qBACI,8OAAC,gJAAW;;;;;AAEpB","debugId":null}}]
-}
