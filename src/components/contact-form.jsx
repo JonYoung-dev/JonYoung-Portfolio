@@ -60,7 +60,6 @@ export default function ContactForm() {
       reset();
     } catch (err) {
       console.error("Contact form error:", err);
-      // toast.promise already shows the error message; extra handling can go here.
     }
   }
 

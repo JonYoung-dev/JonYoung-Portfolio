@@ -1,6 +1,6 @@
 import { auth0 } from "./lib/auth0";
 
-export async function proxy(request) { // Note that proxy uses the standard Request type
+export async function proxy(request) {
   console.log(request)
   return await auth0.middleware(request);
 }

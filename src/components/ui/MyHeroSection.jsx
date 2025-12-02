@@ -12,8 +12,7 @@ import Image from "next/image";
 export default function MyHero() {
     return (
         <Card className="w-full border-none shadow-none bg-zinc-50">
-          <h1 className="font-black text-3xl">Neil Geniebla</h1>
-          This is my portfolio that has super amazing projects and work experience please hire me thank you! ◡̈
+          <h1 className="font-black text-3xl">Jonathan Young</h1>
           <CardContent>
             <Image src="/placeholder-hero-img.jpg" alt="hero image" width="2000" height="1000"/>
           </CardContent>

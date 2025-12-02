@@ -50,7 +50,6 @@ export default function EditProjectForm({ project = {}, uuid }) {
   const { handleSubmit, control, reset, formState } = form;
   const { isSubmitting } = formState;
 
-  // If the server-provided project changes, reset the form
   useEffect(() => {
     reset({
       title: project.title ?? "",
@@ -78,11 +77,9 @@ export default function EditProjectForm({ project = {}, uuid }) {
         error: "Failed to update project. Try again.",
       });
 
-      // navigate to project detail after success
       router.push(`/projects`);
     } catch (err) {
       console.error("Update project error:", err);
-      // toast.promise already shows error
     }
   }
 
