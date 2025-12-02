@@ -19,17 +19,14 @@ export default function ProjectsPage() {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/projects`, { cache: "no-store" });
         const data = await res.json();
 
-        // Handle different possible payload shapes: an array, or an object with a `projects` array
         if (Array.isArray(data)) {
           setProjects(data);
         } else if (data && Array.isArray(data.projects)) {
           setProjects(data.projects);
         } else {
-          // Fallback to empty array to avoid .map errors
           setProjects([]);
         }
       } catch (e) {
-        // On fetch/parsing error, ensure projects is an array
         setProjects([]);
         console.error("Failed to load projects", e);
       }

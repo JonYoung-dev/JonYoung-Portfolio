@@ -10,7 +10,7 @@ export default async function DashboardPage() {
       <h1 className="text-3xl font-semibold">Dashboard</h1>
       <p className="text-muted-foreground">Welcome {session.user.email}</p>
       <p className="text-sm text-muted-foreground">
-        Future labs will let you edit the hero from here; for now, render placeholders.
+        editing editing editing
       </p>
     </section>
   );

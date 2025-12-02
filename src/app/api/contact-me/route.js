@@ -53,7 +53,6 @@ export function GET() {
 }
 
 export async function POST(req) {
-    // Parse JSON body
     let body;
     try {
         body = await req.json();
