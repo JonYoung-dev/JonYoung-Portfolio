@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 22, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/jrjry/Desktop/imanAttempt2/portfolio/src/app/contact-me/page.jsx"],"sourcesContent":["\r\n\r\nexport default function ContactMe() {\r\n    return (\r\n        <ContactForm></ContactForm>\r\n    )\r\n}"],"names":[],"mappings":";;;;;;AAEe,SAAS;IACpB,qBACI,8OAAC;;;;;AAET","debugId":null}}]
+}

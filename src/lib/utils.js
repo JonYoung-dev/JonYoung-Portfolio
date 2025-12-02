@@ -5,13 +5,11 @@ export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-
 export function createSlug(str) {
-  // regex go brr
   return str
     .toLowerCase()
     .trim()
-    .replace(/\s+/g, "-") 
-    .replace(/[^\w-]+/g, "") 
-    .replace(/--+/g, "-"); 
+    .replace(/\s+/g, "-") // Replace spaces with hyphens
+    .replace(/[^\w-]+/g, "") // Remove non-word characters
+    .replace(/--+/g, "-"); // Replace multiple hyphens with a single hyphen
 }
