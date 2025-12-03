@@ -1,9 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { createSlug } from "@/lib/utils";
 import ProjectPreviewCard from "@/components/ui/project-preview-card";
 import { useUser } from "@auth0/nextjs-auth0";
@@ -18,7 +14,7 @@ export default function ProjectsPage() {
       try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/projects`, { cache: "no-store" });
         const data = await res.json();
-
+        
         if (Array.isArray(data)) {
           setProjects(data);
         } else if (data && Array.isArray(data.projects)) {
@@ -36,10 +32,12 @@ export default function ProjectsPage() {
 
   return (
     <div className="flex items-center justify-center flex-wrap max-w-full m-auto">
+
     {Array.isArray(projects) && projects.map((p) => {
         const slug = createSlug(p.title);
         return (
           <ProjectPreviewCard key={slug} project={p} slug={slug} user={user}/>
+
         /* <Card key={slug} className="group hover:scale-105 transition-transform">
             <h3>{p.title}</h3>
             <div className="space-y-3">

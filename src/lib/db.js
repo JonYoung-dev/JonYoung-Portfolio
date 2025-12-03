@@ -137,6 +137,7 @@ function mapRow(row) {
 }
 
 export async function fetchProjects() {
+  console.log("just making sure this shit hits"); 
   await ensureProjectsTable();
   const rows = await sql`
     SELECT

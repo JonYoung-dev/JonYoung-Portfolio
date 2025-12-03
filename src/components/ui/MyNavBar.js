@@ -1,4 +1,3 @@
-'use client';
 
 import {
   NavigationMenu,
@@ -22,18 +21,9 @@ export default async function MyNavBar() {
         <NavigationMenuItem>
             <NavigationMenuLink href="/">Home</NavigationMenuLink>
         </NavigationMenuItem>
-       {session ? 
-        <NavigationMenuItem>
-            <NavigationMenuTrigger className="bg-zinc-50">Projects</NavigationMenuTrigger>
-            <NavigationMenuContent>
-                <NavigationMenuLink href="/projects">List</NavigationMenuLink>
-                <NavigationMenuLink href="/projects/new">New</NavigationMenuLink>
-            </NavigationMenuContent>
-        </NavigationMenuItem>
-        :
         <NavigationMenuItem>
             <NavigationMenuLink href="/projects">Projects</NavigationMenuLink>
-        </NavigationMenuItem>}
+        </NavigationMenuItem>
        <NavigationMenuItem>
             <NavigationMenuTrigger className="bg-zinc-50">Resume</NavigationMenuTrigger>
             <NavigationMenuContent>
