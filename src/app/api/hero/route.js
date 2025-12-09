@@ -2,11 +2,17 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { auth0 } from "@/lib/auth0";
 import { getHero, upsertHero } from "@/lib/db";
-import image2uri, { extTypeMap } from "image2uri";
 import fs from "fs";
 import os from "os";
 import path from "path";
 import { randomUUID } from "crypto";
+
+function imageToBase64(filePath) {
+  const ext = path.extname(filePath).replace(".", "");
+  const mime = ext === "jpg" ? "image/jpeg" : `image/${ext}`;
+  const file = fs.readFileSync(filePath);
+  return `data:${mime};base64,${file.toString("base64")}`;
+}
 
 const heroSchema = z.object({
   avatar: z.string().trim().min(1).refine((v) => v.startsWith("data:"), "Avatar must be a data URL"),
@@ -52,7 +58,7 @@ async function toDataUrl(file, fallbackString) {
     const tmp = path.join(os.tmpdir(), `${randomUUID()}${ext}`);
     fs.writeFileSync(tmp, buffer);
     try {
-      const uri = await image2uri(tmp, { ext });
+      const uri = await imageToBase64(tmp, { ext });
       return uri.startsWith("data:") ? uri : `data:${mime};base64,${uri}`;
     } finally {
       fs.rmSync(tmp, { force: true });
