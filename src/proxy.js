@@ -7,7 +7,7 @@ export async function proxy(request) {
 
 export async function GET() {
   return auth0.handleLogout({
-    returnTo: "http://localhost:3000", // where user goes after logout
+    returnTo: process.env.NEXT_PUBLIC_BASE_URL, // where user goes after logout
   });
 }
 
