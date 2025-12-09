@@ -302,6 +302,49 @@ const defaultHeroContent = {
   longDescription: "...",
 };
 
+const initialHeroes = [
+  {
+    avatar: 'superman.png',
+    full_name: 'Clark Kent',
+    short_description: 'Faster than a speeding bullet, more powerful than a locomotive.',
+    long_description: 'An alien from the planet Krypton, Clark Kent protects Earth as Superman. His abilities include flight, super-strength, and heat vision.',
+  },
+  {
+    avatar: 'wonderwoman.png',
+    full_name: 'Diana Prince',
+    short_description: 'Amazonian warrior princess and emissary of Themyscira.',
+    long_description: 'Trained since birth, Wonder Woman possesses superhuman strength, speed, and durability, and wields the Lasso of Truth.',
+  },
+  {
+    avatar: 'batman.png',
+    full_name: 'Bruce Wayne',
+    short_description: 'The Dark Knight, protector of Gotham City.',
+    long_description: 'A non-superpowered vigilante who uses intellect, money, and martial arts to fight crime. Known for his utility belt and bat-themed gadgets.',
+  },
+];
+
+export async function seedHeroTable() {
+  console.log('Starting to seed hero table...');
+  try {
+    const heroInserts = initialHeroes.map((hero) => {
+      const id = uuidv4(); 
+      
+      return sql`
+        INSERT INTO hero (id, avatar, full_name, short_description, long_description)
+        VALUES (${id}, ${hero.avatar}, ${hero.full_name}, ${hero.short_description}, ${hero.long_description})
+        ON CONFLICT (id) DO NOTHING;
+      `;
+    });
+
+    await Promise.all(heroInserts);
+
+    console.log(`✅ Successfully seeded ${heroInserts.length} heroes into the table.`);
+  } catch (error) {
+    console.error('❌ Error seeding hero table:', error);
+    throw error; 
+  }
+};
+
 export async function ensureHeroTable() {
   await sql`
     create table if not exists hero (
