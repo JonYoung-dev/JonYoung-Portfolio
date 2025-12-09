@@ -292,4 +292,50 @@ export async function deleteProject(id) {
   return mapRow(rows[0]);
 }
 
+// hero
+
+const HERO_PLACEHOLDER_AVATAR = "data:image/gif;base64,R0lGODlhAQABAAAAACw=";
+const defaultHeroContent = {
+  avatar: HERO_PLACEHOLDER_AVATAR,
+  fullName: "...",
+  shortDescription: "...",
+  longDescription: "...",
+};
+
+export async function ensureHeroTable() {
+  await sql`
+    create table if not exists hero (
+      id uuid primary key,
+      avatar text not null default '',
+      full_name text not null,
+      short_description text not null check (char_length(short_description) <= 120),
+      long_description text not null,
+      created_at timestamptz not null default now(),
+      updated_at timestamptz not null default now()
+    );
+  `;
+  const [{ count }] = await sql`select count(*)::int as count from hero`;
+  if (Number(count) === 0) await seedHeroTable();
+}
+
+export async function getHero() {
+  await ensureHeroTable();
+  const [row] = await sql`
+    select id, avatar, full_name, short_description, long_description,
+           created_at as "createdAt", updated_at as "updatedAt"
+    from hero
+    order by created_at asc
+    limit 1;
+  `;
+  return row ? mapHeroRow(row) : null;
+}
+
+export async function upsertHero(updates = {}) {
+  await ensureHeroTable();
+  const current = await getHero();
+  // merge defaults → current → updates, normalize avatar/lengths, then UPDATE/INSERT
+  // return mapped row with fallbacks for empty fields
+}
+
+
 export { fetchProjects as getProjects };
