@@ -1,2 +1,4 @@
-import { auth0 } from "@/lib/auth0";
-export const { GET, POST } = auth0.handle;
+import { handleAuth } from '@auth0/nextjs-auth0'; 
+
+// Pages Router uses a default export
+export default handleAuth();
