@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.9.0",
-    "@auth0/nextjs-auth0": "^4.13.1",
+    "@auth0/nextjs-auth0": "^4.13.2",
     "@hookform/resolvers": "^5.2.2",
     "@neondatabase/serverless": "^1.0.2",
     "@radix-ui/react-label": "^2.1.8",
