@@ -137,7 +137,6 @@ function mapRow(row) {
 }
 
 export async function fetchProjects() {
-  console.log("just making sure this shit hits"); 
   await ensureProjectsTable();
   const rows = await sql`
     SELECT
@@ -292,57 +291,13 @@ export async function deleteProject(id) {
   return mapRow(rows[0]);
 }
 
-// hero
-
+// LAB 5 CODE
 const HERO_PLACEHOLDER_AVATAR = "data:image/gif;base64,R0lGODlhAQABAAAAACw=";
 const defaultHeroContent = {
   avatar: HERO_PLACEHOLDER_AVATAR,
   fullName: "...",
   shortDescription: "...",
   longDescription: "...",
-};
-
-const initialHeroes = [
-  {
-    avatar: 'superman.png',
-    full_name: 'Clark Kent',
-    short_description: 'Faster than a speeding bullet, more powerful than a locomotive.',
-    long_description: 'An alien from the planet Krypton, Clark Kent protects Earth as Superman. His abilities include flight, super-strength, and heat vision.',
-  },
-  {
-    avatar: 'wonderwoman.png',
-    full_name: 'Diana Prince',
-    short_description: 'Amazonian warrior princess and emissary of Themyscira.',
-    long_description: 'Trained since birth, Wonder Woman possesses superhuman strength, speed, and durability, and wields the Lasso of Truth.',
-  },
-  {
-    avatar: 'batman.png',
-    full_name: 'Bruce Wayne',
-    short_description: 'The Dark Knight, protector of Gotham City.',
-    long_description: 'A non-superpowered vigilante who uses intellect, money, and martial arts to fight crime. Known for his utility belt and bat-themed gadgets.',
-  },
-];
-
-export async function seedHeroTable() {
-  console.log('Starting to seed hero table...');
-  try {
-    const heroInserts = initialHeroes.map((hero) => {
-      const id = uuidv4(); 
-      
-      return sql`
-        INSERT INTO hero (id, avatar, full_name, short_description, long_description)
-        VALUES (${id}, ${hero.avatar}, ${hero.full_name}, ${hero.short_description}, ${hero.long_description})
-        ON CONFLICT (id) DO NOTHING;
-      `;
-    });
-
-    await Promise.all(heroInserts);
-
-    console.log(`✅ Successfully seeded ${heroInserts.length} heroes into the table.`);
-  } catch (error) {
-    console.error('❌ Error seeding hero table:', error);
-    throw error; 
-  }
 };
 
 export async function ensureHeroTable() {
@@ -372,13 +327,86 @@ export async function getHero() {
   `;
   return row ? mapHeroRow(row) : null;
 }
+async function seedHeroTable() {
+  const id = randomUUID();
+  await sql`
+    INSERT INTO hero (id, avatar, full_name, short_description, long_description)
+    VALUES (
+      ${id}::uuid,
+      ${"https://picsum.photos/300"},
+      ${"Neil Geniebla"},
+      ${"Full-Stack Web Developer"},
+      ${"This is my portfolio that has super amazing projects and work experience please hire me thank you! ◡̈"}
+    )
+  `;
+}
+
+function mapHeroRow(row) {
+  return {
+    id: row.id,
+    avatar: row.avatar || HERO_PLACEHOLDER_AVATAR,
+    fullName: row.full_name || defaultHeroContent.fullName,
+    shortDescription: row.short_description || defaultHeroContent.shortDescription,
+    longDescription: row.long_description || defaultHeroContent.longDescription,
+    createdAt: row.createdAt,
+    updatedAt: row.updatedAt,
+  };
+}
 
 export async function upsertHero(updates = {}) {
   await ensureHeroTable();
+  
   const current = await getHero();
-  // merge defaults → current → updates, normalize avatar/lengths, then UPDATE/INSERT
-  // return mapped row with fallbacks for empty fields
+
+  // Normalize and sanitize inputs
+  const avatar = updates.avatar?.trim() || current?.avatar || HERO_PLACEHOLDER_AVATAR;
+  const fullName = (updates.fullName || current?.fullName || defaultHeroContent.fullName).trim();
+  const shortDescription = (updates.shortDescription || current?.shortDescription || defaultHeroContent.shortDescription).trim();
+  const longDescription = (updates.longDescription || current?.longDescription || defaultHeroContent.longDescription).trim();
+
+  if (current) {
+    // UPDATE existing row
+    const [row] = await sql`
+      UPDATE hero
+      SET
+        avatar = ${avatar},
+        full_name = ${fullName},
+        short_description = ${shortDescription},
+        long_description = ${longDescription},
+        updated_at = now()
+      WHERE id = ${current.id}::uuid
+      RETURNING
+        id,
+        avatar,
+        full_name,
+        short_description,
+        long_description,
+        created_at AS "createdAt",
+        updated_at AS "updatedAt"
+    `;
+    return mapHeroRow(row);
+  } else {
+    // INSERT new row
+    const id = randomUUID();
+    const [row] = await sql`
+      INSERT INTO hero (id, avatar, full_name, short_description, long_description)
+      VALUES (
+        ${id}::uuid,
+        ${avatar},
+        ${fullName},
+        ${shortDescription},
+        ${longDescription}
+      )
+      RETURNING
+        id,
+        avatar,
+        full_name,
+        short_description,
+        long_description,
+        created_at AS "createdAt",
+        updated_at AS "updatedAt"
+    `;
+    return mapHeroRow(row);
+  }
 }
-
-
 export { fetchProjects as getProjects };
