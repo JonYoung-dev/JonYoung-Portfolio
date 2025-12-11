@@ -146,6 +146,7 @@ export async function fetchProjects() {
       img,
       link,
       keywords,
+      count,
       created_at AS "createdAt",
       updated_at AS "updatedAt"
     FROM projects
@@ -154,6 +155,16 @@ export async function fetchProjects() {
 
   return rows.map(mapRow);
 }
+
+export async function increaseCount(route) {
+  const rows = await sql`
+    INSERT INTO your_table (id, name, value) 
+    VALUES (1, 'Example', 'New Value')
+    ON CONFLICT (id) DO UPDATE 
+    SET name = EXCLUDED.name, value = EXCLUDED.value;
+  `;
+  return rows;
+};
 
 export async function getProjectById(id) {
   await ensureProjectsTable();
@@ -334,9 +345,9 @@ async function seedHeroTable() {
     VALUES (
       ${id}::uuid,
       ${"https://picsum.photos/300"},
-      ${"Neil Geniebla"},
+      ${"Jonathan Young"},
       ${"Full-Stack Web Developer"},
-      ${"This is my portfolio that has super amazing projects and work experience please hire me thank you! ◡̈"}
+      ${"This is my portfolio s"}
     )
   `;
 }
@@ -409,4 +420,18 @@ export async function upsertHero(updates = {}) {
     return mapHeroRow(row);
   }
 }
+
+export async function trackPageView(route) {
+  const routeClean = decodeURIComponent(route);
+
+  const rows = await sql`
+    INSERT INTO routeLog (route, count) 
+    VALUES (${routeClean}, 1)
+    ON CONFLICT (route) DO UPDATE 
+    SET count = routeLog.count + 1
+    RETURNING * `;
+
+  return rows;
+}
+
 export { fetchProjects as getProjects };

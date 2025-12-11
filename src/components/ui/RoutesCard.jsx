@@ -17,30 +17,9 @@ import ProjectControls from "./ProjectControls";
     // desc: "Short blurb.",
     // img: "https://placehold.co/300.png",
     // link: "#"
+    // count
 
-export default function ProjectPreviewCard({ project, slug, user }) {
-
- const handleClick = async (title) => {
-  console.log("Attempting to increase counter via API fetch");
-
-  const encoded = encodeURIComponent(title);
-
-    const res = await fetch(`/api/counter/${encoded}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    });
-  
-    if (!res.ok) {
-      console.error("Counter update failed:", res.status);
-      throw new Error("Failed to update counter");
-    }
-  
-    console.log("Counter updated");
-  };
-
-
+export default function ProjectStatsCard({ project, slug, user }) {
 
   return ( 
     <Card className="py-4 px-4 m-2 max-w-[350px]">
@@ -54,9 +33,11 @@ export default function ProjectPreviewCard({ project, slug, user }) {
           <Button asChild size="sm" variant="secondary" onClick={() => handleClick(project.title)}>
             <a href={project.link} target="_blank" rel="noreferrer">Open</a>
           </Button>
-          <Button asChild size="sm">
-            <Link href={`/projects/${slug}`}>Learn More</Link>
-          </Button>
+          <h1>
+            Total Number of Visitors from site: {project.count}
+            Percentage of total visitors
+          </h1>
+
       </div>
       {user && <ProjectControls projectId={project.id} slug={slug}/>}
     </Card>
