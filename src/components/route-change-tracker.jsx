@@ -11,7 +11,7 @@ export function RouteChangeTracker() {
   useEffect(() => {
     const url = `${pathname}?${searchParams}`;
     console.log('Navigated to:', url, '\nattempting to fetch');
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/counter/${encodeURIComponent(url)}`).then((res) => {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/counter?route=${(url)}`).then((res) => {
         if (res.ok) {
             console.log('fetch to counter update succesful.')
         } else {

@@ -421,12 +421,23 @@ export async function upsertHero(updates = {}) {
   }
 }
 
+export async function getPageViewData() {
+  
+  const rows = await sql`
+    select *
+    from routeLog
+    order by count;`
+
+  return rows;
+}
+
 export async function trackPageView(route) {
+  console.log("trackPageView for route:", route)
   const routeClean = decodeURIComponent(route);
 
   const rows = await sql`
-    INSERT INTO routeLog (route, count) 
-    VALUES (${routeClean}, 1)
+    INSERT INTO routeLog (route) 
+    VALUES (${routeClean})
     ON CONFLICT (route) DO UPDATE 
     SET count = routeLog.count + 1
     RETURNING * `;
