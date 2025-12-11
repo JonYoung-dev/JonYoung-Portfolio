@@ -37,28 +37,6 @@ export default function ProjectsPage() {
         const slug = createSlug(p.title);
         return (
           <ProjectPreviewCard key={slug} project={p} slug={slug} user={user}/>
-
-        /* <Card key={slug} className="group hover:scale-105 transition-transform">
-            <h3>{p.title}</h3>
-            <div className="space-y-3">
-            <Image
-                src={p.img}
-                alt={p.title}
-                width={300}
-                height={300}
-                className="w-full h-48 object-cover rounded-md"
-            />
-            <p className="text-sm text-muted-foreground line-clamp-2">{p.description}</p>
-            <div className="flex gap-2">
-                <Button asChild size="sm" variant="secondary">
-                <a href={p.link} target="_blank" rel="noreferrer">Open</a>
-                </Button>
-                <Button asChild size="sm">
-                <Link href={`/projects/${slug}`}>Details</Link>
-                </Button>
-            </div>
-            </div>
-        </Card> */
         );
     })}
     </div>

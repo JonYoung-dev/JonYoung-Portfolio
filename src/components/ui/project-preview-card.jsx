@@ -19,29 +19,7 @@ import ProjectControls from "./ProjectControls";
     // link: "#"
 
 export default function ProjectPreviewCard({ project, slug, user }) {
-
- const handleClick = async (title) => {
-  console.log("Attempting to increase counter via API fetch");
-
-  const encoded = encodeURIComponent(title);
-
-    const res = await fetch(`/api/counter/${encoded}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    });
   
-    if (!res.ok) {
-      console.error("Counter update failed:", res.status);
-      throw new Error("Failed to update counter");
-    }
-  
-    console.log("Counter updated");
-  };
-
-
-
   return ( 
     <Card className="py-4 px-4 m-2 max-w-[350px]">
       <h2 className="font-bold">{project.title}</h2>
