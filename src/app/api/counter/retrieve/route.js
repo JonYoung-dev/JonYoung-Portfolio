@@ -3,7 +3,11 @@
 import { getPageViewData } from "@/lib/db";
 
 // Main handler
-export async function GET(request, { params }) {
-  const rows = await getPageViewData(route);
-  return Response.json({ ok: true, rows: rows });
+
+export async function GET() {
+  console.log("attempting to fetch data from db for stats");
+
+  const rows = await getPageViewData();
+
+  return Response.json(rows); 
 }

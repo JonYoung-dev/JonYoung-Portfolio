@@ -42,6 +42,11 @@ export default async function MyNavBar() {
             <NavigationMenuLink href="/dashboard">Dashboard</NavigationMenuLink>
         </NavigationMenuItem>
         }
+        {session && 
+        <NavigationMenuItem>
+            <NavigationMenuLink href="/stats">Statistics</NavigationMenuLink>
+        </NavigationMenuItem>
+        }
       </NavigationMenuList>
     </NavigationMenu>
   </div>
